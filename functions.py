@@ -15,3 +15,27 @@ def search_by_tag(word):
             relevant_posts_list.append(post)
     return relevant_posts_list
 
+def save_new_picture(picture):
+    picture_name = picture.filename
+    picture_savepath = f"uploads/images/{picture_name}"
+    picture.save(picture_savepath)
+    return picture_savepath
+
+def format_post(picture_path, text):
+    formatted_post = {"pic": picture_path, "content": text}
+    return formatted_post
+
+def load_post_to_base(post):
+    with open("posts.json", "r") as file:
+        base = json.load(file)
+        base.append(post)
+
+    with open ("posts.json", "w") as  file:
+        base = json.dumps(base, ensure_ascii=False)
+        print(base)
+        return base
+
+
+
+
+
