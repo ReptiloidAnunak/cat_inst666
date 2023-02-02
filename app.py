@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, send_from_directory
 from main.main_view import main_blueprint
 from loader.loader_view import loader_blueprint
 

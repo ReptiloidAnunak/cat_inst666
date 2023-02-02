@@ -9,9 +9,14 @@ def page_post_form():
 
 @loader_blueprint.route("/post_upload", methods=["POST"])
 def page_post_upload():
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     user_picture = request.files.get("picture")
+    user_picture_extension = user_picture.filename.split('.')[-1]
+
     if not user_picture:
         return 'Ошибка загрузки'
+    elif user_picture_extension not in ALLOWED_EXTENSIONS:
+        return 'Файл - не изображение!'
 
     user_text = request.form.get("content")
     picture_path = save_new_picture(user_picture)
