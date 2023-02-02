@@ -1,5 +1,5 @@
-from flask import Flask, request, render_template, send_from_directory, Blueprint
-from functions import load_posts_base, search_by_tag, save_new_picture, format_post, load_post_to_base
+from flask import request, render_template, Blueprint
+from functions import save_new_picture, format_post, load_post_to_base, save_renew_base
 import logging
 
 loader_blueprint = Blueprint("loader_blueprint", __name__)
@@ -17,8 +17,6 @@ def page_post_upload():
     picture_path = save_new_picture(user_picture)
 
     post_to_load = format_post(picture_path, user_text)
-    load_post_to_base(post_to_load)
-
-
-
+    uploaded_posts = load_post_to_base(post_to_load)
+    save_renew_base(uploaded_posts)
     return render_template("post_uploaded.html", user_text=user_text, picture_path=picture_path)

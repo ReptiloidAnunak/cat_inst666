@@ -25,17 +25,17 @@ def format_post(picture_path, text):
     formatted_post = {"pic": picture_path, "content": text}
     return formatted_post
 
+
+def save_renew_base(posts):
+    with open ("posts.json", "w") as file:
+        json.dump(posts, file, ensure_ascii=False)
+
+
+
 def load_post_to_base(post):
     with open("posts.json", "r") as file:
         base = json.load(file)
         base.append(post)
-
-    with open ("posts.json", "w") as  file:
-        base = json.dumps(base, ensure_ascii=False)
-        print(base)
-        return base
-
-
-
-
+        save_renew_base(base)
+    return base
 
